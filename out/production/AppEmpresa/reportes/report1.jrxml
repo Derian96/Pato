@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="34403142-3c03-4caa-9f7f-51b2fb07ecd7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString>
+		<![CDATA[SELECT
+     tblcategoria.`nombre` AS tblcategoria_nombre,
+     tblproducto.`idProducto` AS tblproducto_idProducto,
+     tblproducto.`nombre` AS tblproducto_nombre,
+     tblproducto.`idCategoria` AS tblproducto_idCategoria,
+     tblproducto.`existencia` AS tblproducto_existencia,
+     tblproducto.`precio` AS tblproducto_precio,
+     tblproducto.`nivelNuevoPedido` AS tblproducto_nivelNuevoPedido,
+     tblproducto.`suspendido` AS tblproducto_suspendido
+FROM
+     `tblcategoria` tblcategoria INNER JOIN `tblproducto` tblproducto ON tblcategoria.`idCategoria` = tblproducto.`idCategoria`]]>
+	</queryString>
+	<field name="tblcategoria_nombre" class="java.lang.String"/>
+	<field name="tblproducto_idProducto" class="java.lang.Integer"/>
+	<field name="tblproducto_nombre" class="java.lang.String"/>
+	<field name="tblproducto_idCategoria" class="java.lang.Integer"/>
+	<field name="tblproducto_existencia" class="java.lang.Integer"/>
+	<field name="tblproducto_precio" class="java.lang.Double"/>
+	<field name="tblproducto_nivelNuevoPedido" class="java.lang.Integer"/>
+	<field name="tblproducto_suspendido" class="java.lang.Boolean"/>
+	<variable name="tblproducto_idProducto_1" class="java.lang.Integer" resetType="Group" resetGroup="tblcategoria_nombre" calculation="Count">
+		<variableExpression><![CDATA[$F{tblproducto_idProducto}]]></variableExpression>
+	</variable>
+	<variable name="tblproducto_existencia_1" class="java.lang.Integer" resetType="Group" resetGroup="tblcategoria_nombre" calculation="Sum">
+		<variableExpression><![CDATA[$F{tblproducto_existencia}]]></variableExpression>
+	</variable>
+	<group name="tblcategoria_nombre">
+		<groupExpression><![CDATA[$F{tblcategoria_nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<textField>
+					<reportElement uuid="7d6f602f-b115-4a97-88db-019798cd43a6" style="SubTitle" x="47" y="13" width="506" height="24" forecolor="#006600"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tblcategoria_nombre}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement uuid="1c3b0d49-c3b0-40db-b737-67244a2de7b2" mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="46">
+				<textField>
+					<reportElement uuid="23f68885-9e81-499f-b7c8-dc5196fd4731" x="0" y="15" width="181" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA["Cantidd de productos: "+$V{tblproducto_idProducto_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="d532e832-8ca7-45c4-af0b-412ecc1ad67b" x="156" y="16" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{tblproducto_existencia_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d2e15150-e0c8-4773-9cbb-ca7894116044" style="Title" x="0" y="13" width="263" height="33"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Leaf Green Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="193c6743-a232-4c28-95d4-4c7300cac85e" style="SubTitle" x="100" y="46" width="174" height="22"/>
+				<textElement/>
+				<text><![CDATA[Leaf Green SubTitle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement uuid="14646c1f-c2ab-4654-8976-82503d45d45a" positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="d47eea36-c633-40fc-8b1c-1ae617601325" style="Column header" x="0" y="19" width="79" height="15"/>
+				<textElement/>
+				<text><![CDATA[tblproducto_idProducto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7b507797-3276-47ea-8926-d97adaf4a3d3" style="Column header" x="79" y="19" width="79" height="15"/>
+				<textElement/>
+				<text><![CDATA[tblproducto_nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="33878484-e5b2-4560-b660-cf9208e991a9" style="Column header" x="158" y="19" width="79" height="15"/>
+				<textElement/>
+				<text><![CDATA[tblproducto_idCategoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="26a6882b-9ab1-42c6-9e39-952e23d3a6c6" style="Column header" x="237" y="19" width="79" height="15"/>
+				<textElement/>
+				<text><![CDATA[tblproducto_existencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="21059714-4f54-4a81-88f9-a61fdd38d172" style="Column header" x="316" y="19" width="79" height="15"/>
+				<textElement/>
+				<text><![CDATA[tblproducto_precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5475995b-b9c7-412e-b9ee-7a945e1aed5a" style="Column header" x="395" y="19" width="79" height="15"/>
+				<textElement/>
+				<text><![CDATA[tblproducto_nivelNuevoPedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2ea4024e-e7d7-442b-a4d7-2d1383c1a2eb" style="Column header" x="474" y="19" width="79" height="15"/>
+				<textElement/>
+				<text><![CDATA[tblproducto_suspendido]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="330b6fe3-374f-442f-868c-5a13a0618d0d" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="3fc1305b-50c9-4707-8935-55e1a3500a9d" style="Detail" x="0" y="0" width="79" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tblproducto_idProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0b51f2f7-534c-411b-a74f-61f9d050e45c" style="Detail" x="79" y="0" width="79" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tblproducto_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="145adf2b-5d4a-4651-ad48-a67ed3f423a8" style="Detail" x="158" y="0" width="79" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tblproducto_idCategoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7c3532d7-0add-402d-bbb4-f6cf76c6a213" style="Detail" x="237" y="0" width="79" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tblproducto_existencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="414eeeb1-d7eb-4a4d-9471-3d90aaedfe4e" style="Detail" x="316" y="0" width="79" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tblproducto_precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="294a0c2d-e9ac-4d08-9806-1e0a65542c9b" style="Detail" x="395" y="0" width="79" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tblproducto_nivelNuevoPedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a5cd0130-d0d7-4150-8cde-2073e713f10a" style="Detail" x="474" y="0" width="79" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tblproducto_suspendido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="0d54b683-652f-4982-aef9-ac7e30e5ce4d" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7a375ad5-20ab-4a0e-8e4c-b37e5a4ce56f" style="Column header" x="433" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="ff0fef8c-2ef0-48c7-9f6f-4b4ca92aa083" style="Column header" x="513" y="0" width="40" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="63b594cb-e08d-45c6-8ec6-412e2c9baf94" style="Column header" x="0" y="0" width="197" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
