@@ -1,8 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    Universidad Nacional de Costa Rica
+    Sede Regional Chorotega, Campus Nicoya  
+    Ingeniería en Sistemas de Información
+    Programación II - EIF204
+    Académica: Gloriana Peña Ramírez 
+
+    PROYECTO PROGRAMADO - Facturación JAVA
+
+    Desarrolladores: 
+    - Eddie Alfaro 
+    - Derian Abarca
+    - Diego Aguilar
+*/ 
+
 package logica;
 
 import java.net.URL;
@@ -17,11 +27,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-
-/**
- *
- * @author JoeAlv
- */
 public class GestionProducto extends Conexion {
     
     public GestionProducto () {}

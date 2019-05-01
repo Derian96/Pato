@@ -1,25 +1,27 @@
+/*
+    Universidad Nacional de Costa Rica
+    Sede Regional Chorotega, Campus Nicoya  
+    Ingeniería en Sistemas de Información
+    Programación II - EIF204
+    Académica: Gloriana Peña Ramírez 
+
+    PROYECTO PROGRAMADO - Facturación JAVA
+
+    Desarrolladores: 
+    - Eddie Alfaro 
+    - Derian Abarca
+    - Diego Aguilar
+*/ 
 
 package logica;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Ing. Gloriana Peña Ramírez
- */
 public class Conexion {
+    
     //ATRIBUTOS DE LA CLASE CLSCONEXION
-
     static PoolConexionMySql poolConexion;
     protected static int servidor;
     static protected Connection conexion;//Para hacer la conexión
@@ -27,9 +29,8 @@ public class Conexion {
     protected PreparedStatement pstmt; 
     protected Statement stmt;//Hacer sentencias SQL
     protected ResultSet rs;//Guardar los resultados de las sentencias SQL
+    
     //MÉTODOS PÚBLICOS DE LA CLASE CONEXCIONBD
-
-
     public Conexion() {
         // conexion = null;
         obj_Procedimiento = null;
@@ -40,8 +41,6 @@ public class Conexion {
     }//=========================================================================
     //Establece conexion a Oracle con el usuario y clave establecidos
 
-
-
     public synchronized boolean conectarBD() {
         try {
             conexion = poolConexion.getConexion();
@@ -49,7 +48,7 @@ public class Conexion {
                 System.out.print("Conexion obtenida\t");
                 return true;
             } else {
-//            conexion = poolConexion.getConexion();
+            // conexion = poolConexion.getConexion();
                 return false;
             }
         } catch (Exception e) {

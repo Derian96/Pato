@@ -1,14 +1,16 @@
 /*
-    Universidad Nacional
+    Universidad Nacional de Costa Rica
     Sede Regional Chorotega, Campus Nicoya  
     Ingeniería en Sistemas de Información
-    Programación II  - EIF204
-    Profesor: Gloriana Peña Ramírez 
+    Programación II - EIF204
+    Académica: Gloriana Peña Ramírez 
 
-    TAREA #3 - AppEmpresa
+    PROYECTO PROGRAMADO - Facturación JAVA
 
-    Estudiante: Eddie Alfaro Villegas
-
+    Desarrolladores: 
+    - Eddie Alfaro 
+    - Derian Abarca
+    - Diego Aguilar
 */ 
 
 package gui;
@@ -19,18 +21,11 @@ import javax.swing.JOptionPane;
 import logica.Categoria;
 import logica.GestionCategoria;
 
-/**
- *
- * @author JoeAlv
- */
 public class frmCategorias extends javax.swing.JInternalFrame {
     
     GestionCategoria gestionCategoria;
     Categoria categoria;
 
-    /**
-     * Creates new form frmCategorias
-     */
     public frmCategorias() {
         initComponents();
         gestionCategoria = new GestionCategoria();

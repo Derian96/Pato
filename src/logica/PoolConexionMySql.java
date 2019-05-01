@@ -1,3 +1,17 @@
+/*
+    Universidad Nacional de Costa Rica
+    Sede Regional Chorotega, Campus Nicoya  
+    Ingeniería en Sistemas de Información
+    Programación II - EIF204
+    Académica: Gloriana Peña Ramírez 
+
+    PROYECTO PROGRAMADO - Facturación JAVA
+
+    Desarrolladores: 
+    - Eddie Alfaro 
+    - Derian Abarca
+    - Diego Aguilar
+*/ 
 package logica;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
@@ -8,10 +22,6 @@ import java.util.logging.Logger;
 import javax.sql.PooledConnection;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author 
- */
 public class PoolConexionMySql {
 
     MysqlConnectionPoolDataSource ds_con;
@@ -29,8 +39,6 @@ public class PoolConexionMySql {
             Logger.getLogger(PoolConexionMySql.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-   
 
     public Connection getConexion() {
         try {

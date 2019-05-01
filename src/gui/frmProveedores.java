@@ -1,18 +1,18 @@
 /*
-    Universidad Nacional
+    Universidad Nacional de Costa Rica
     Sede Regional Chorotega, Campus Nicoya  
     Ingeniería en Sistemas de Información
     Programación II - EIF204
-    Profesor: Gloriana Peña Ramírez 
+    Académica: Gloriana Peña Ramírez 
 
-    PROYECTO #3 - AppEmpresa
+    PROYECTO PROGRAMADO - Facturación JAVA
 
     Desarrolladores: 
-    - Eddie Alfaro Villegas
-    - 
-    -
-
+    - Eddie Alfaro 
+    - Derian Abarca
+    - Diego Aguilar
 */ 
+
 package gui;
 
 import java.sql.ResultSet;
