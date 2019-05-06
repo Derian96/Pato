@@ -253,7 +253,7 @@ public class GestionProducto extends Conexion {
         return rpta;
     }
     
-    public void cargarReporteProductos() {
+    public void cargarReporteProductos2() {
         conectarBD();
         JasperReport reporte;
         JasperPrint reporte_view;
@@ -271,7 +271,7 @@ public class GestionProducto extends Conexion {
         } 
     }
     
-    public void cargarReporteProductosConLogo() {
+    public void cargarReporteProductos() {
         conectarBD();
         JasperReport reporte;
         JasperPrint reporte_view;

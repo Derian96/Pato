@@ -6,13 +6,15 @@
     Académica: Gloriana Peña Ramírez 
 
     PROYECTO PROGRAMADO - Facturación JAVA
+                                                                                                                       
+    Software: Econimic Sails                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    Grupo: Javafari Team
 
     Desarrolladores: 
     - Eddie Alfaro 
     - Derian Abarca
     - Diego Aguilar
-*/ 
-
+ */
 package gui;
 
 import java.sql.ResultSet;
@@ -23,20 +25,20 @@ import logica.GestionUsuario;
 
 public class frmLogin extends javax.swing.JFrame {
 
-
     public String iduser;
     private final GestionUsuario gestionUsuario;
     private int aux = 3;
-    
+
     public frmLogin() {
 
         initComponents();
-         //Código para poner icono personalizado al JFrame frmPrincipal
+        //Código para poner icono personalizado al JFrame frmPrincipal
         ImageIcon icon = new ImageIcon(getClass().getResource("/img/company.png"));
         this.setIconImage(icon.getImage());
         txtpassword.setEnabled(false);
         btnlogin.setEnabled(false);
         gestionUsuario = new GestionUsuario();
+          
     }
 
     /**
@@ -56,9 +58,12 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtpassword = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Iniciar Session");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Iniciar Sesión");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -94,7 +99,7 @@ public class frmLogin extends javax.swing.JFrame {
         });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/users_32x32.png"))); // NOI18N
-        jLabel2.setText("Usuario:");
+        jLabel2.setText(" Usuario: ");
 
         txtpassword.setToolTipText("password");
         txtpassword.addActionListener(new java.awt.event.ActionListener() {
@@ -111,14 +116,12 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconfinder_key_309058.png"))); // NOI18N
         jLabel3.setText("Contraseña:");
 
+        jLabel4.setText("Powered by Javafari Team");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -135,6 +138,15 @@ public class frmLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 63, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +165,9 @@ public class frmLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,15 +192,15 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // Código del Menu Item salir
-        int resp = JOptionPane.showConfirmDialog(rootPane, "¿Esta seguro de salir?","Salir",
+        int resp = JOptionPane.showConfirmDialog(rootPane, "¿Esta seguro de salir?", "Salir",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(resp == JOptionPane.YES_OPTION) {
+        if (resp == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtusernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusernameKeyReleased
-        if(!txtusername.getText().equals("")) {
+        if (!txtusername.getText().equals("")) {
             txtpassword.setEnabled(true);
         } else {
             txtpassword.setEnabled(false);
@@ -194,7 +208,7 @@ public class frmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusernameKeyReleased
 
     private void txtpasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyReleased
-        if(!txtpassword.getText().equals("")) {
+        if (!txtpassword.getText().equals("")) {
             btnlogin.setEnabled(true);
         } else {
             btnlogin.setEnabled(false);
@@ -205,14 +219,14 @@ public class frmLogin extends javax.swing.JFrame {
         btnlogin.setEnabled(false);
         String username = txtusername.getText();
         String password = String.valueOf(txtpassword.getPassword());
-        
+
         try {
             login(username, password);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             gestionUsuario.desconectarBD();
-            JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error al intentar conectarse al sistema, por favor intentelo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE); 
+            JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error al intentar conectarse al sistema, por favor intentelo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
             limpiar();
-        }        
+        }
     }//GEN-LAST:event_btnloginActionPerformed
 
     private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
@@ -239,7 +253,7 @@ public class frmLogin extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -254,53 +268,101 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txtpassword;
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
-    
-    private void login( String username, String password) throws SQLException{
-        
-        if (gestionUsuario.usuarioExiste(username)){
-            String sql = "SELECT * FROM tblusuarios WHERE usuario = '" + username + "' && contraseña = '" + password + "'";
-            gestionUsuario.conectarBD();
-            ResultSet rs = gestionUsuario.seleccionar(sql);
+
+    // Funcion login
+    private void login(String username, String password) throws SQLException 
+    {
+        // Verificamos si el usuario existe Javafari Team
+        if (gestionUsuario.usuarioExiste(username)) 
+        {
+            if(gestionUsuario.verificarPass(username,password))
+            {
+                String sql = "SELECT * FROM tblusuario WHERE usuario = '" + username + "'";
+                gestionUsuario.conectarBD();
+                ResultSet rs = gestionUsuario.seleccionar(sql);
             
-            if (rs.next()){
-                String id_user_session = rs.getString(1);
-                String name_user_session = rs.getString(2);
-                
-                // Envio de reporte de inicio de sesión del usuario
-                gestionUsuario.login_log("El usuario " + name_user_session + " ha iniciado session.", id_user_session);
-                
-                JOptionPane.showMessageDialog(rootPane, "Bienvenido: " + name_user_session, "Login", JOptionPane.INFORMATION_MESSAGE); 
-                frmPrincipal Principal;
-                Principal = new frmPrincipal();
-                Principal.txtuser.setText(name_user_session);
-                Principal.txtid.setText(id_user_session);
-                Principal.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "El usuario ó la contraseña son incorrectos.", "Error", JOptionPane.WARNING_MESSAGE); 
-                aux--;
+                // verificamos si existe coincidencia
+                if (rs.next())
+                {
+                    int id_user_session = Integer.parseInt(rs.getString(1));
+                    String name_user_session = rs.getString(2);
+                    int idtipoUsuario = rs.getInt(7);
+
+
+                    // Envio de reporte de inicio de sesión del usuario
+                    gestionUsuario.Login_log("El usuario " + name_user_session + " ha iniciado session.", id_user_session);
+
+                    JOptionPane.showMessageDialog(rootPane, "Bienvenido: " + name_user_session, "Login", JOptionPane.INFORMATION_MESSAGE);
+                    frmPrincipal Principal;
+                    Principal = new frmPrincipal();
+                    Principal.txtuser.setText(name_user_session);
+                    Principal.txtid.setText("" + id_user_session);
+
+                    if(idtipoUsuario == 2)
+                    {
+                        Principal.mnuCategoriaGestion.setVisible(false);
+                        Principal.mnuProveedoresGestion.setVisible(false);
+                        Principal.mnuProductosGestion.setVisible(false);
+                        Principal.mnuClientesGestion.setVisible(false);
+                        Principal.mnuFacturacion.setVisible(false);
+                        Principal.mnuVentasIngresosReporte.setVisible(false);
+                        Principal.mnuUsuariosGestion.setVisible(false);
+                        Principal.mnuAyudaIssue.setVisible(false);
+                    } 
+                    else if ( idtipoUsuario == 3) 
+                    {
+                        Principal.mnuCategorias.setVisible(false);
+                        Principal.mnuProveedores.setVisible(false);
+                        Principal.mnuProductos.setVisible(false);
+                        Principal.mnuClientesReporte.setVisible(false);
+                        Principal.mnuUsuarios.setVisible(false);
+                        Principal.mnuVentas.setVisible(false);
+                        Principal.mnuAyudaIssue.setVisible(false);
+                    }
+                    Principal.setLocationRelativeTo(null);
+                    Principal.setVisible(true);
+                    this.dispose();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(rootPane, "El usuario ó la contraseña son incorrectos.", "Error", JOptionPane.WARNING_MESSAGE);
+                    aux--;
+                    limpiar();
+                    gestionUsuario.desconectarBD();
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(rootPane, "Contraseña Incorrecta", "Error", JOptionPane.WARNING_MESSAGE);
                 limpiar();
                 gestionUsuario.desconectarBD();
+                
             }
-        
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "El usuario y la contraseña son incorrectos.", "Error", JOptionPane.WARNING_MESSAGE); 
+        } 
+        else
+        {
+            JOptionPane.showMessageDialog(rootPane, "El usuario y la contraseña son incorrectos.", "Error", JOptionPane.WARNING_MESSAGE);
             aux--;
             limpiar();
             gestionUsuario.desconectarBD();
         }
         
-        if(aux == 0){
-            JOptionPane.showMessageDialog(rootPane, "Ha excedido el numero de intentos permitidos, el sistema se cerrará.", "Error", JOptionPane.WARNING_MESSAGE); 
+        // Verificamos si la variable aux, si es igual a cero entonces se cierra el programa
+        if (aux == 0) 
+        {
+            JOptionPane.showMessageDialog(rootPane, "Ha excedido el numero de intentos permitidos, el sistema se cerrará.", "Error", JOptionPane.WARNING_MESSAGE);
             System.exit(0);
-        }
+        }  
     }
     
-    private void limpiar (){
+    // Funcion limpiar permite resetear los input y restablecer los botones
+    private void limpiar()
+    {
         txtpassword.setText("");
         txtusername.setText("");
         txtpassword.setEnabled(false);

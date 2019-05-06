@@ -38,7 +38,6 @@ public class frmProductos extends javax.swing.JInternalFrame {
         producto = null;
         listarProductos();
         listarCategorias();
-        
     }
 
     /**
@@ -279,13 +278,10 @@ public class frmProductos extends javax.swing.JInternalFrame {
         });
         popMnuProductos.add(popMnuCerrar);
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Gestión Productos");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/img/product_16x16.png"))); // NOI18N
 
+        barraHerramientas.setFloatable(false);
         barraHerramientas.setRollover(true);
 
         btnGuardar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -396,68 +392,20 @@ public class frmProductos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // Código para mostrar el JInternaFrame frmCategorías
-        
-        winProducto.setSize(360, 260);
-        winProducto.setTitle("Guardar");
-        ImageIcon img = new ImageIcon(getClass().getResource("/img/save.png"));
-        winProducto.setIconImage(img.getImage());
-        txtIdProducto.setText("");
-        txtIdProducto.setEditable(true);
-        txtNombre.setText("");
-           
-        cboProducto.setSelectedIndex(-1);
-        txtExistencia.setText("");
-        txtPrecio.setText("");
-        txtNivelNuevoPedido.setText("");
-        chkSuspendido.setSelected(false);
-        winProducto.setLocationRelativeTo(tblProductos);
-        winProducto.setVisible(true);
-        
+        guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // Código para abrir el JDialog winProducto cuando se desea editar una categoría existente
-        int fila = tblProductos.getSelectedRow();
-        
-        if (fila != -1 ){
-            winProducto.setSize(360, 260);
-            winProducto.setTitle("Editar");
-            ImageIcon img = new ImageIcon(getClass().getResource("/img/edit.png"));
-            winProducto.setIconImage(img.getImage());
-            winProducto.setLocationRelativeTo(tblProductos);
-            
-            int idProducto = Integer.parseInt(tblProductos.getValueAt(fila, 0).toString());
-            producto = gestionProducto.buscarProducto(idProducto);
-            
-            txtIdProducto.setText(""+producto.getIdProducto());
-            txtIdProducto.setEditable(false);
-            txtNombre.setText(producto.getNombre());
-            cboProducto.setSelectedIndex((producto.getIdCategoria())- 1);
-            txtExistencia.setText(""+producto.getExistencia());
-            txtPrecio.setText(""+producto.getPrecio());
-            txtNivelNuevoPedido.setText(""+producto.getNivelNuevoPedido());
-            
-            char s = 1;
-            if(producto.getSuspendido() == s){
-                chkSuspendido.setSelected(true);
-            } else {
-                chkSuspendido.setSelected(false);
-            }
-            
-            winProducto.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(winProducto, "Seleccione la categoría que desea editar", "Editar", JOptionPane.WARNING_MESSAGE);
-        }
+        editar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         // Código del botón cerrar del formulario frmProductos
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // Código del botón cancelar de winCategoria
+        // Código del botón cancelar de winProducto
         winProducto.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -470,75 +418,11 @@ public class frmProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPrecioActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // Llamada al método eliminarCategoria
-        int fila = tblProductos.getSelectedRow();
-         
-        if (fila != -1) {
-            int idProducto = Integer.parseInt(tblProductos.getValueAt(fila, 0).toString());
-            String nombre = tblProductos.getValueAt(fila, 1).toString();
-            int resp = JOptionPane.showConfirmDialog(winProducto, "¿Esta seguro de eliminar el producto "+nombre+"?","Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-            
-            if (resp == JOptionPane.YES_OPTION) {
-                gestionProducto.conectarBD();
-                
-                if (gestionProducto.eliminarProducto(idProducto)) {
-                    JOptionPane.showMessageDialog(winProducto, "Producto eliminado exitosamente", "Eliminar", JOptionPane.INFORMATION_MESSAGE);
-                    listarProductos();
-                } else {
-                    JOptionPane.showMessageDialog(winProducto,"Error al intentar eliminar", "Eliminar", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(winProducto, "Seleccione el producto que desea eliminar", "Eliminar", JOptionPane.WARNING_MESSAGE);
-        }
+        eliminar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // Botón Guardar de la ventana winCategoria
-        String msg = validarDatos();
-        
-        if (msg.equals("")) {
-            producto = new Producto();
-            producto.setIdProducto(Integer.parseInt(txtIdProducto.getText()));
-            producto.setNombre(txtNombre.getText());
-            producto.setIdCategoria((cboProducto.getSelectedIndex())+ 1);
-            producto.setExistencia(Integer.parseInt(txtExistencia.getText()));
-            producto.setPrecio(Double.parseDouble(txtPrecio.getText()));
-            producto.setNivelNuevoPedido(Integer.parseInt(txtNivelNuevoPedido.getText()));
-            if (chkSuspendido.isSelected() == true){
-                char s = 1;
-                producto.setSuspendido(s);
-            } else {
-                char s = 0;
-                producto.setSuspendido(s);
-            }
-            // ==========================    ====================== //
-            if(winProducto.getTitle().equals("Guardar")){
-                if (gestionProducto.insertarProducto(producto)){
-                    JOptionPane.showMessageDialog(winProducto, "Producto almacenado exitosamente", "Guardar", JOptionPane.INFORMATION_MESSAGE);
-                    winProducto.dispose();
-                    listarProductos();
-                } else {
-                    JOptionPane.showMessageDialog(winProducto, "Error al intentar guardar producto", "Guardar", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-            // =======================   ========================= //
-            if(winProducto.getTitle().equals("Editar")){
-                if (gestionProducto.editarProducto(producto)){
-                    JOptionPane.showMessageDialog(winProducto, "Producto editado exitosamente", "Editar", JOptionPane.INFORMATION_MESSAGE);
-                    winProducto.dispose();
-                    listarProductos();
-                } else {
-                    JOptionPane.showMessageDialog(winProducto, "Error al intentar editar producto", "Editar", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-            // =======================   ========================= //
-            
-            
-        } else {
-            JOptionPane.showMessageDialog(winProducto,msg, "Validando datos", JOptionPane.WARNING_MESSAGE);
-        }
-        
+        salvar();        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void popMnuEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popMnuEditarActionPerformed
@@ -565,8 +449,8 @@ public class frmProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblProductosMouseClicked
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        // TODO add your handling code here:
-        gestionProducto.cargarReporteProductosConLogo();
+        // Llamamos al metodo para crear el reporte de productos
+        gestionProducto.cargarReporteProductos();
     }//GEN-LAST:event_btnImprimirActionPerformed
 
 
@@ -629,6 +513,131 @@ public class frmProductos extends javax.swing.JInternalFrame {
                 cboProducto.addItem(rs.getString("nombre"));
             }
         gestionProducto.desconectarBD();
+    }
+    
+    private void guardar () {
+        // Código para mostrar el JInternaFrame frmProductos
+        
+        winProducto.setSize(360, 260);
+        winProducto.setTitle("Guardar");
+        ImageIcon img = new ImageIcon(getClass().getResource("/img/save.png"));
+        winProducto.setIconImage(img.getImage());
+        txtIdProducto.setText("");
+        txtIdProducto.setEditable(true);
+        txtNombre.setText("");
+           
+        cboProducto.setSelectedIndex(-1);
+        txtExistencia.setText("");
+        txtPrecio.setText("");
+        txtNivelNuevoPedido.setText("");
+        chkSuspendido.setSelected(false);
+        winProducto.setLocationRelativeTo(tblProductos);
+        winProducto.setVisible(true);
+    }
+    
+    private void salvar(){
+        // Botón Guardar de la ventana winProducto
+        String msg = validarDatos();
+        
+        if (msg.equals("")) {
+            producto = new Producto();
+            producto.setIdProducto(Integer.parseInt(txtIdProducto.getText()));
+            producto.setNombre(txtNombre.getText());
+            producto.setIdCategoria((cboProducto.getSelectedIndex())+ 1);
+            producto.setExistencia(Integer.parseInt(txtExistencia.getText()));
+            producto.setPrecio(Double.parseDouble(txtPrecio.getText()));
+            producto.setNivelNuevoPedido(Integer.parseInt(txtNivelNuevoPedido.getText()));
+            if (chkSuspendido.isSelected() == true){
+                char s = 1;
+                producto.setSuspendido(s);
+            } else {
+                char s = 0;
+                producto.setSuspendido(s);
+            }
+            // ==========================    ====================== //
+            if(winProducto.getTitle().equals("Guardar")){
+                if (gestionProducto.insertarProducto(producto)){
+                    JOptionPane.showMessageDialog(winProducto, "Producto almacenado exitosamente", "Guardar", JOptionPane.INFORMATION_MESSAGE);
+                    winProducto.dispose();
+                    listarProductos();
+                } else {
+                    JOptionPane.showMessageDialog(winProducto, "Error al intentar guardar producto", "Guardar", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            // =======================   ========================= //
+            if(winProducto.getTitle().equals("Editar")){
+                if (gestionProducto.editarProducto(producto)){
+                    JOptionPane.showMessageDialog(winProducto, "Producto editado exitosamente", "Editar", JOptionPane.INFORMATION_MESSAGE);
+                    winProducto.dispose();
+                    listarProductos();
+                } else {
+                    JOptionPane.showMessageDialog(winProducto, "Error al intentar editar producto", "Editar", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            // =======================   ========================= //
+            
+        } else {
+            JOptionPane.showMessageDialog(winProducto,msg, "Validando datos", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+    private void eliminar(){
+        // Llamada al método eliminarProducto
+        int fila = tblProductos.getSelectedRow();
+         
+        if (fila != -1) {
+            int idProducto = Integer.parseInt(tblProductos.getValueAt(fila, 0).toString());
+            String nombre = tblProductos.getValueAt(fila, 1).toString();
+            int resp = JOptionPane.showConfirmDialog(winProducto, "¿Esta seguro de eliminar el producto "+nombre+"?","Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+            
+            if (resp == JOptionPane.YES_OPTION) {
+                gestionProducto.conectarBD();
+                
+                if (gestionProducto.eliminarProducto(idProducto)) {
+                    JOptionPane.showMessageDialog(winProducto, "Producto eliminado exitosamente", "Eliminar", JOptionPane.INFORMATION_MESSAGE);
+                    listarProductos();
+                } else {
+                    JOptionPane.showMessageDialog(winProducto,"Error al intentar eliminar", "Eliminar", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(winProducto, "Seleccione el producto que desea eliminar", "Eliminar", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+    private void editar() {
+        // Código para abrir el JDialog winProducto cuando se desea editar una producto existente
+        int fila = tblProductos.getSelectedRow();
+        
+        if (fila != -1 ){
+            winProducto.setSize(360, 260);
+            winProducto.setTitle("Editar");
+            ImageIcon img = new ImageIcon(getClass().getResource("/img/edit.png"));
+            winProducto.setIconImage(img.getImage());
+            winProducto.setLocationRelativeTo(tblProductos);
+            
+            int idProducto = Integer.parseInt(tblProductos.getValueAt(fila, 0).toString());
+            producto = gestionProducto.buscarProducto(idProducto);
+            
+            txtIdProducto.setText(""+producto.getIdProducto());
+            txtIdProducto.setEditable(false);
+            txtNombre.setText(producto.getNombre());
+            cboProducto.setSelectedIndex((producto.getIdCategoria())- 1);
+            txtExistencia.setText(""+producto.getExistencia());
+            txtPrecio.setText(""+producto.getPrecio());
+            txtNivelNuevoPedido.setText(""+producto.getNivelNuevoPedido());
+            
+            char s = 1;
+            if(producto.getSuspendido() == s){
+                chkSuspendido.setSelected(true);
+            } else {
+                chkSuspendido.setSelected(false);
+            }
+            
+            winProducto.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(winProducto, "Seleccione el producto que desea editar", "Editar", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private String validarDatos() {

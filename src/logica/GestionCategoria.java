@@ -6,16 +6,28 @@
     Académica: Gloriana Peña Ramírez 
 
     PROYECTO PROGRAMADO - Facturación JAVA
+                                                                                                                       
+    Software: Econimic Sails                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    Grupo: Javafari Team
 
     Desarrolladores: 
     - Eddie Alfaro 
     - Derian Abarca
     - Diego Aguilar
-*/ 
+ */
 
 package logica;
 
+import java.net.URL;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class GestionCategoria extends Conexion {
     
@@ -48,8 +60,6 @@ public class GestionCategoria extends Conexion {
         try {
             // Nos conectamos
             conectarBD();
-            
-            // Buscar los datos del profesor
             String call = "{CALL ps_categoria_insertar(?,?,?)}";
             
             // Preparamos la sentencia
@@ -63,7 +73,6 @@ public class GestionCategoria extends Conexion {
            rpta = obj_Procedimiento.executeUpdate() == 1;
            
            desconectarBD();
-            
             
         } catch (SQLException ex) {
             desconectarBD();
@@ -83,7 +92,6 @@ public class GestionCategoria extends Conexion {
             // Nos conectamos
             conectarBD();
             
-            // Buscar los datos del profesor
             String call = "{CALL ps_categoria_editar(?,?,?)}";
             
             // Preparamos la sentencia
@@ -116,7 +124,6 @@ public class GestionCategoria extends Conexion {
             // Nos conectamos
             conectarBD();
             
-            // Buscar los datos del profesor
             String call = "{CALL ps_categoria_eliminar(?)}";
             
             // Preparamos la sentencia
@@ -147,7 +154,6 @@ public class GestionCategoria extends Conexion {
             // Nos conectamos
             conectarBD();
             
-            // Buscar los datos del profesor
             String call = "{CALL ps_categoria_buscar(?)}";
             
             // Preparamos la sentencia
@@ -176,7 +182,7 @@ public class GestionCategoria extends Conexion {
         return categoria;
     }
     
-     //  método buscarIdProducto
+     //  método buscarIdCategoria
     public boolean buscarIdCategoria (int idCategoria) {
         boolean rpta = false;
         
@@ -194,7 +200,6 @@ public class GestionCategoria extends Conexion {
             obj_Procedimiento.setInt(1, idCategoria);
             rs = obj_Procedimiento.executeQuery();
             
-            
             if (rs.next()){
                 if ( rs.getRow() > 0){
                 rpta = true;
@@ -210,6 +215,25 @@ public class GestionCategoria extends Conexion {
         }
 
         return rpta;
+    }
+    
+    public void cargarReporteCategorias() {
+        conectarBD();
+        JasperReport reporte;
+        JasperPrint reporte_view;
+        
+        try { 
+            URL in = this.getClass().getResource("/reportes/rptCategorias.jasper");
+            reporte = (JasperReport) JRLoader.loadObject(in);
+            //Se crea un objeto HashMap 
+            Map parametros = new HashMap();
+            parametros.clear();  
+            parametros.put("logo", this.getClass().getResourceAsStream("/img/company.png")); 
+            reporte_view = JasperFillManager.fillReport(reporte, parametros, getConexion()); 
+            JasperViewer.viewReport(reporte_view, false);     
+        } catch (JRException ex) { 
+            System.err.println(ex.toString()); 
+        } 
     }
     
 }

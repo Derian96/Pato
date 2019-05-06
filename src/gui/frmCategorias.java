@@ -15,6 +15,7 @@
 
 package gui;
 
+import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -31,7 +32,7 @@ public class frmCategorias extends javax.swing.JInternalFrame {
         gestionCategoria = new GestionCategoria();
         categoria = null;
         listarCategorias();
-        
+
     }
 
     /**
@@ -55,6 +56,12 @@ public class frmCategorias extends javax.swing.JInternalFrame {
         txtDescripcion = new javax.swing.JTextArea();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        popMnuCategorias = new javax.swing.JPopupMenu();
+        popMnuEditar = new javax.swing.JMenuItem();
+        popMnuEliminar = new javax.swing.JMenuItem();
+        popMnuImprimir = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        popMnuCerrar = new javax.swing.JMenuItem();
         barraHerramientas = new javax.swing.JToolBar();
         btnGuardar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -97,28 +104,28 @@ public class frmCategorias extends javax.swing.JInternalFrame {
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtIdCategoria))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2))))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -130,7 +137,7 @@ public class frmCategorias extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -172,16 +179,46 @@ public class frmCategorias extends javax.swing.JInternalFrame {
                 .addGroup(winCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addContainerGap())
+                .addGap(26, 26, 26))
         );
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
+        popMnuEditar.setText("Editar");
+        popMnuEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popMnuEditarActionPerformed(evt);
+            }
+        });
+        popMnuCategorias.add(popMnuEditar);
+
+        popMnuEliminar.setLabel("Eliminar");
+        popMnuEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popMnuEliminarActionPerformed(evt);
+            }
+        });
+        popMnuCategorias.add(popMnuEliminar);
+
+        popMnuImprimir.setLabel("Imprimir");
+        popMnuImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popMnuImprimirActionPerformed(evt);
+            }
+        });
+        popMnuCategorias.add(popMnuImprimir);
+        popMnuCategorias.add(jSeparator1);
+
+        popMnuCerrar.setLabel("Cerrar");
+        popMnuCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popMnuCerrarActionPerformed(evt);
+            }
+        });
+        popMnuCategorias.add(popMnuCerrar);
+
         setTitle("Gestión Categorías");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/img/category_32x32.png"))); // NOI18N
 
+        barraHerramientas.setFloatable(false);
         barraHerramientas.setRollover(true);
 
         btnGuardar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -229,6 +266,11 @@ public class frmCategorias extends javax.swing.JInternalFrame {
         btnImprimir.setFocusable(false);
         btnImprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnImprimir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
         barraHerramientas.add(btnImprimir);
 
         btnCerrar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -252,6 +294,12 @@ public class frmCategorias extends javax.swing.JInternalFrame {
                 "#", "NOMBRE", "DESCRIPCION"
             }
         ));
+        tblCategorias.setComponentPopupMenu(popMnuCategorias);
+        tblCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCategoriasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCategorias);
 
         lblTotal.setText("Total: 0");
@@ -261,10 +309,11 @@ public class frmCategorias extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(barraHerramientas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +331,106 @@ public class frmCategorias extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // Código para mostrar el JInternaFrame frmCategorías
+        guardar();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // Código para abrir el JDialog winCategoria cuando se desea editar una categoría existente
+        editar();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // Código del botón cancelar de winCategoria
+        winCategoria.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        // Código del botón cerrar del formulario frmCategoria
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // Llamada al método eliminarCategoria
+        eliminar();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // Botón Guardar de la ventana winCategoria
+        nuevo();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        // Llamamos al metodo para crear el reporte de las categorías
+        gestionCategoria.cargarReporteCategorias();
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
+    private void popMnuEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popMnuEditarActionPerformed
+        btnEditarActionPerformed(evt);
+    }//GEN-LAST:event_popMnuEditarActionPerformed
+
+    private void popMnuEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popMnuEliminarActionPerformed
+        btnEliminarActionPerformed(evt);
+    }//GEN-LAST:event_popMnuEliminarActionPerformed
+
+    private void popMnuImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popMnuImprimirActionPerformed
+        // Reporte con parametros (idCategoria)
+    }//GEN-LAST:event_popMnuImprimirActionPerformed
+
+    private void popMnuCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popMnuCerrarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_popMnuCerrarActionPerformed
+
+    private void tblCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoriasMouseClicked
+        // evento doble clic. Hace llamada al código del botón btnEditar (Reutilización de código
+        if (evt.getClickCount() == 2){ // Si le dio doble clic
+            btnEditarActionPerformed (new ActionEvent(tblCategorias, 0, ""));
+        }
+    }//GEN-LAST:event_tblCategoriasMouseClicked
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToolBar barraHerramientas;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JPopupMenu popMnuCategorias;
+    private javax.swing.JMenuItem popMnuCerrar;
+    private javax.swing.JMenuItem popMnuEditar;
+    private javax.swing.JMenuItem popMnuEliminar;
+    private javax.swing.JMenuItem popMnuImprimir;
+    private javax.swing.JTable tblCategorias;
+    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtIdCategoria;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JDialog winCategoria;
+    // End of variables declaration//GEN-END:variables
+
+    private void listarCategorias() {
         
+        gestionCategoria.conectarBD();
+        ResultSet rs = gestionCategoria.listarCategorias();
+        
+        if (rs != null) {
+            tblCategorias.setModel(gestionCategoria.cargarEnTabla(rs));
+            lblTotal.setText("Total: " + tblCategorias.getRowCount());
+        }
+        
+        gestionCategoria.desconectarBD();
+    }
+    
+    private void guardar() {
         winCategoria.setSize(360, 260);
         winCategoria.setTitle("Guardar");
         ImageIcon img = new ImageIcon(getClass().getResource("/img/save.png"));
@@ -293,71 +441,9 @@ public class frmCategorias extends javax.swing.JInternalFrame {
         txtDescripcion.setText("");
         winCategoria.setLocationRelativeTo(tblCategorias);
         winCategoria.setVisible(true);
-        
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-        // Código para abrir el JDialog winCategoria cuando se desea editar una categoría existente
-        int fila = tblCategorias.getSelectedRow();
-        
-        if (fila != -1 ){
-            winCategoria.setSize(360, 260);
-            winCategoria.setTitle("Editar");
-            ImageIcon img = new ImageIcon(getClass().getResource("/img/edit.png"));
-            winCategoria.setIconImage(img.getImage());
-            winCategoria.setLocationRelativeTo(tblCategorias);
-            
-            int idCategoria = Integer.parseInt(tblCategorias.getValueAt(fila, 0).toString());
-            categoria = gestionCategoria.buscarCategoria(idCategoria);
-            
-            txtIdCategoria.setText(""+categoria.getIdCategoria());
-            txtIdCategoria.setEditable(false);
-            txtNombre.setText(categoria.getNombre());
-            txtDescripcion.setText(categoria.getDescripcion());
-            winCategoria.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(winCategoria, "Seleccione la categoría que desea editar", "Editar", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // Código del botón cancelar de winCategoria
-        winCategoria.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        // Código del botón cerrar del formulario frmCategoria
-        this.dispose();
-    }//GEN-LAST:event_btnCerrarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // Llamada al método eliminarCategoria
-        int fila = tblCategorias.getSelectedRow();
-         
-        if (fila != -1) {
-            int idCategoria = Integer.parseInt(tblCategorias.getValueAt(fila, 0).toString());
-            String nombre = tblCategorias.getValueAt(fila, 1).toString();
-            int resp = JOptionPane.showConfirmDialog(winCategoria, "¿Esta seguro de eliminar la categoria "+nombre+"?","Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-            
-            if (resp == JOptionPane.YES_OPTION) {
-                gestionCategoria.conectarBD();
-                
-                if (gestionCategoria.eliminarCategoria(idCategoria)) {
-                    JOptionPane.showMessageDialog(winCategoria, "Categoria eliminada exitosamente", "Eliminar", JOptionPane.INFORMATION_MESSAGE);
-                    listarCategorias();
-                } else {
-                    JOptionPane.showMessageDialog(winCategoria,"Error al intentar eliminar", "Eliminar", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(winCategoria, "Seleccione la categoria que desea eliminar", "Eliminar", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
-        // Botón Guardar de la ventana winCategoria
+    }
+    
+    private void nuevo() {
         String msg = validarDatos();
         
         if (msg.equals("")) {
@@ -387,50 +473,55 @@ public class frmCategorias extends javax.swing.JInternalFrame {
                 }
             }
             // =======================   ========================= //
-            
-            
         } else {
             JOptionPane.showMessageDialog(winCategoria,msg, "Validando datos", JOptionPane.WARNING_MESSAGE);
         }
+    }
+    
+    private void editar() {
+        int fila = tblCategorias.getSelectedRow();
         
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToolBar barraHerramientas;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnCerrar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnImprimir;
-    private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblTotal;
-    private javax.swing.JTable tblCategorias;
-    private javax.swing.JTextArea txtDescripcion;
-    private javax.swing.JTextField txtIdCategoria;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JDialog winCategoria;
-    // End of variables declaration//GEN-END:variables
-
-    private void listarCategorias() {
-        
-        gestionCategoria.conectarBD();
-        ResultSet rs = gestionCategoria.listarCategorias();
-        
-        if (rs != null) {
-            tblCategorias.setModel(gestionCategoria.cargarEnTabla(rs));
-            lblTotal.setText("Total: " + tblCategorias.getRowCount());
+        if (fila != -1 ){
+            winCategoria.setSize(360, 260);
+            winCategoria.setTitle("Editar");
+            ImageIcon img = new ImageIcon(getClass().getResource("/img/edit.png"));
+            winCategoria.setIconImage(img.getImage());
+            winCategoria.setLocationRelativeTo(tblCategorias);
+            
+            int idCategoria = Integer.parseInt(tblCategorias.getValueAt(fila, 0).toString());
+            categoria = gestionCategoria.buscarCategoria(idCategoria);
+            
+            txtIdCategoria.setText(""+categoria.getIdCategoria());
+            txtIdCategoria.setEditable(false);
+            txtNombre.setText(categoria.getNombre());
+            txtDescripcion.setText(categoria.getDescripcion());
+            winCategoria.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(winCategoria, "Seleccione la categoría que desea editar", "Editar", JOptionPane.WARNING_MESSAGE);
         }
-        
-        gestionCategoria.desconectarBD();
+    }
+    
+    private void eliminar() {
+        int fila = tblCategorias.getSelectedRow();
+         
+        if (fila != -1) {
+            int idCategoria = Integer.parseInt(tblCategorias.getValueAt(fila, 0).toString());
+            String nombre = tblCategorias.getValueAt(fila, 1).toString();
+            int resp = JOptionPane.showConfirmDialog(winCategoria, "¿Esta seguro de eliminar la categoria "+nombre+"?","Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+            
+            if (resp == JOptionPane.YES_OPTION) {
+                gestionCategoria.conectarBD();
+                
+                if (gestionCategoria.eliminarCategoria(idCategoria)) {
+                    JOptionPane.showMessageDialog(winCategoria, "Categoria eliminada exitosamente", "Eliminar", JOptionPane.INFORMATION_MESSAGE);
+                    listarCategorias();
+                } else {
+                    JOptionPane.showMessageDialog(winCategoria,"Error al intentar eliminar", "Eliminar", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(winCategoria, "Seleccione la categoria que desea eliminar", "Eliminar", JOptionPane.WARNING_MESSAGE);
+        }
     }
     
     private String validarDatos() {
@@ -466,7 +557,6 @@ public class frmCategorias extends javax.swing.JInternalFrame {
             txtDescripcion.requestFocus();
             return "Por favor ingrese la descripción de la categoría";
         }
-        
         return ""; // No hay errores
     }
     

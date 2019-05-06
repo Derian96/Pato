@@ -64,11 +64,8 @@ public class frmConsultaProductos extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
         cboEstado = new javax.swing.JComboBox<>();
         cboCategorias = new javax.swing.JComboBox<>();
+        btnCerrar = new javax.swing.JButton();
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Reporte Productos");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/img/product_16x16.png"))); // NOI18N
 
@@ -137,6 +134,13 @@ public class frmConsultaProductos extends javax.swing.JInternalFrame {
 
         cboCategorias.setToolTipText("");
 
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -166,11 +170,15 @@ public class frmConsultaProductos extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnBuscar))
-                    .addComponent(jLabel3))
-                .addGap(75, 75, 75))
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,8 +201,9 @@ public class frmConsultaProductos extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 6, Short.MAX_VALUE))
                     .addComponent(txtNombre)
                     .addComponent(txtidProducto)))
         );
@@ -203,17 +212,17 @@ public class frmConsultaProductos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 635, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,6 +245,90 @@ public class frmConsultaProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chkCategoriaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscar();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void chkEstadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkEstadoStateChanged
+        if (chkEstado.isSelected()) {
+            cboEstado.setEnabled(true);
+        } else {
+            cboEstado.setEnabled(false);
+        }
+    }//GEN-LAST:event_chkEstadoStateChanged
+
+    private void chkCategoriaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkCategoriaStateChanged
+        if (chkCategoria.isSelected()) {
+            cboCategorias.setEnabled(true);
+            try {
+                listarCategorias();
+            } catch (SQLException ex) {
+                Logger.getLogger(frmConsultaProductos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            cboCategorias.setEnabled(false);
+        }
+    }//GEN-LAST:event_chkCategoriaStateChanged
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JComboBox<String> cboCategorias;
+    private javax.swing.JComboBox<String> cboEstado;
+    private javax.swing.JCheckBox chkCategoria;
+    private javax.swing.JCheckBox chkEstado;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JTable tblProductos;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtStock;
+    private javax.swing.JTextField txtidProducto;
+    // End of variables declaration//GEN-END:variables
+    
+    private void listarProductos() {
+        
+        gestionProducto.conectarBD();
+        ResultSet rs = gestionProducto.listarProductos();
+        
+        if (rs != null) {
+            tblProductos.setModel(gestionProducto.cargarEnTabla(rs));
+            lblTotal.setText("Total: " + tblProductos.getRowCount());
+        }
+        
+        gestionProducto.desconectarBD();
+    }
+    
+    private void listarCategorias() throws SQLException{
+        cboCategorias.removeAllItems();
+        cboCategorias.addItem("Elegir");
+        gestionProducto.conectarBD();
+        ResultSet rs = gestionProducto.seleccionar("SELECT nombre FROM tblcategoria");
+        
+        try {
+            while (rs.next()) {
+                cboCategorias.addItem(rs.getString(1));
+            }
+        gestionProducto.desconectarBD();
+        } catch (SQLException ex){
+         System.err.println(ex);
+         gestionProducto.desconectarBD();
+        }
+    }
+    
+    private void buscar() {
         // ---------------  BUSQUEDA POR DEFECTO -------------//
         String sql = "SELECT * FROM tblproducto ";
         
@@ -406,90 +499,15 @@ public class frmConsultaProductos extends javax.swing.JInternalFrame {
                 }
             } 
         }
-        
-
         gestionProducto.conectarBD();
         ResultSet rs = gestionProducto.seleccionar(sql);
         if (rs!=null) {
             tblProductos.setModel(gestionProducto.cargarEnTabla(rs));
             
         }
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void chkEstadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkEstadoStateChanged
-        if (chkEstado.isSelected()) {
-            cboEstado.setEnabled(true);
-        } else {
-            cboEstado.setEnabled(false);
-        }
-    }//GEN-LAST:event_chkEstadoStateChanged
-
-    private void chkCategoriaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkCategoriaStateChanged
-        if (chkCategoria.isSelected()) {
-            cboCategorias.setEnabled(true);
-            try {
-                listarCategorias();
-            } catch (SQLException ex) {
-                Logger.getLogger(frmConsultaProductos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-            cboCategorias.setEnabled(false);
-        }
-    }//GEN-LAST:event_chkCategoriaStateChanged
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JComboBox<String> cboCategorias;
-    private javax.swing.JComboBox<String> cboEstado;
-    private javax.swing.JCheckBox chkCategoria;
-    private javax.swing.JCheckBox chkEstado;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblTotal;
-    private javax.swing.JTable tblProductos;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtStock;
-    private javax.swing.JTextField txtidProducto;
-    // End of variables declaration//GEN-END:variables
-    
-    private void listarProductos() {
-        
-        gestionProducto.conectarBD();
-        ResultSet rs = gestionProducto.listarProductos();
-        
-        if (rs != null) {
-            tblProductos.setModel(gestionProducto.cargarEnTabla(rs));
-            lblTotal.setText("Total: " + tblProductos.getRowCount());
-        }
-        
-        gestionProducto.desconectarBD();
     }
     
-    private void listarCategorias() throws SQLException{
-        cboCategorias.removeAllItems();
-        cboCategorias.addItem("Elegir");
-        gestionProducto.conectarBD();
-        ResultSet rs = gestionProducto.seleccionar("SELECT nombre FROM tblcategoria");
-        
-        try {
-            while (rs.next()) {
-                cboCategorias.addItem(rs.getString(1));
-            }
-        gestionProducto.desconectarBD();
-        } catch (SQLException ex){
-         System.err.println(ex);
-         gestionProducto.desconectarBD();
-        }
-    }
+    
 
     
 }

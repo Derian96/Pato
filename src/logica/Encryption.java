@@ -18,121 +18,64 @@
 
 package logica;
 
-import java.sql.SQLException;
+import java.math.*;
+import java.security.*;
 
-public class GestionUsuario extends Conexion {
+/*  
+    En la clase Encription encontraremos 
+    los metodos que permitiran cifrar las
+    contraseñas de los usuarios.
+*/
+
+public class Encryption {
     
-    public boolean usuarioExiste (String username) throws SQLException {
-        boolean rst = false;
+    /*
+        La funcion MD5 nos permite encriptar una contraseña
+        con el algorítmo de cifrado MD5.
+    */
+    public static String MD5(String pass) {
         try {
-            String call = "{CALL ps_usuario_existe(?)}";
-            conectarBD();
-            // Preparamos la sentencia
-            obj_Procedimiento = conexion.prepareCall(call);
-            
-            // Identificacipon
-            obj_Procedimiento.setString(1, username);
-            rs = obj_Procedimiento.executeQuery();
-            rst = rs.next();
-        } catch (SQLException ex){
-            desconectarBD();
-        }
-        return rst;
-    }
-    
-    public boolean verificarPass(String username, String password) throws SQLException 
-    {
-        boolean rst = false;
-        
-        try 
-        {
-            String call = "{CALL ps_usuario_password(?)}";
-            conectarBD();
-            // Preparamos la sentencia
-            obj_Procedimiento = conexion.prepareCall(call);
-            
-            // Identificacipon
-            obj_Procedimiento.setString(1, username);
-            rs = obj_Procedimiento.executeQuery();
-            
-            if(rs.next())
-            {
-                
-                // Almacenamos el password registrado en la variable hashedPassword
-                String hashedPassword = rs.getString(1);
-                // Generamos el Hash de la contraseña introducida por el usuario
-                String generatedSecuredPasswordHash = Encryption.encriptPassword(password);
-                // Validamos si las contraseñas coinciden
-                boolean matched = hashedPassword.equals(generatedSecuredPasswordHash);
-                // retornamos el resultado
-                rst = matched;
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(pass.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hastext = number.toString(16);
+            while ( hastext.length() < 32){
+                hastext = "0" + hastext;
             }
-        } catch (SQLException ex){
-            desconectarBD();
-        }
-        return rst;
+            return hastext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }       
     }
     
     
-    
-    // método Login_log
-    public boolean Login_log(String log, int idUsuario) {
-        boolean rpta = false;
-        
+    /*
+        La funcion SHA1() nos permite encriptar una contraseña
+        con el algorítmo de cifrado SHA1.
+    */
+    public static String SHA1(String pass){
         try {
-            // Nos conectamos
-            conectarBD();
-            String call = "{CALL ps_login_log_insertar(?,?)}";
-            
-            // Preparamos la sentencia
-            obj_Procedimiento = conexion.prepareCall(call);
-            
-            // Preparamos la sentencia
-            obj_Procedimiento.setString(1,log);
-            obj_Procedimiento.setInt(2,idUsuario);
-            
-           rpta = obj_Procedimiento.executeUpdate() == 1;
-           
-           desconectarBD();
-            
-        } catch (SQLException ex) {
-            desconectarBD();
-            System.err.println(ex);
-        } catch (Exception ex) {
-            desconectarBD();
-            System.err.println(ex);
-        }
-        return rpta;
+            MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+            byte[] result = mDigest.digest(pass.getBytes());
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < result.length; i++){
+                sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }  
     }
     
-    // método log
-    public boolean log(String log, int idUsuario) {
-        boolean rpta = false;
-        
-        try {
-            // Nos conectamos
-            conectarBD();
-            String call = "{CALL ps_log_insertar(?,?)}";
-            
-            // Preparamos la sentencia
-            obj_Procedimiento = conexion.prepareCall(call);
-            
-            // Preparamos la sentencia
-            obj_Procedimiento.setString(1,log);
-            obj_Procedimiento.setInt(2,idUsuario);
-            
-           rpta = obj_Procedimiento.executeUpdate() == 1;
-           
-           desconectarBD();
-            
-        } catch (SQLException ex) {
-            desconectarBD();
-            System.err.println(ex);
-        } catch (Exception ex) {
-            desconectarBD();
-            System.err.println(ex);
-        }
-        return rpta;
+    /*
+        La funcion encriptPassword nos permite encriptar una contraseña
+        con el algorítmo de cifrado MD5 y SHA1.
+    */
+    public static String encriptPassword(String pass){
+        String md5Password = MD5(pass);
+        return SHA1(md5Password);
     }
-    
 }
+
