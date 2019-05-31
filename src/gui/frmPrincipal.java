@@ -54,7 +54,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         frmCat = new frmCategorias();
         frmPro = new frmProductos();
         frmCPro = new frmConsultaProductos();
-        frmFact = new frmFacturacion();
+        
         frmRVnt = new frmConsultaVentas();
         frmRIng = new frmConsultaIngresos();
         frmProv = new frmProveedores();
@@ -67,7 +67,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         escritorio.add(frmCat);
         escritorio.add(frmPro);
         escritorio.add(frmCPro);
-        escritorio.add(frmFact);
+        
         escritorio.add(frmRVnt);
         escritorio.add(frmRIng);
         escritorio.add(frmProv);
@@ -708,11 +708,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     
     // Esta funcion verifica si el frmFacturacion si ya existe, sino crea una nueva.
     private void mostrarGestionFacturacion(){
-        if (frmFact.isShowing()){
-            frmFact.toFront();
-        } else {
+    
+            frmFact = new frmFacturacion();
+            escritorio.add(frmFact);
             frmFact.show();
-        }
+        
     }
     
     // Esta funcion verifica si el frmProveedores si ya existe, sino crea una nueva.

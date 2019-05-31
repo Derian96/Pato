@@ -23,7 +23,7 @@ import java.sql.SQLException;
 public class GestionUsuario extends Conexion {
     
     public boolean usuarioExiste (String username) throws SQLException {
-        boolean rst = false;
+        boolean rst = true;
         try {
             String call = "{CALL ps_usuario_existe(?)}";
             conectarBD();
@@ -42,7 +42,7 @@ public class GestionUsuario extends Conexion {
     
     public boolean verificarPass(String username, String password) throws SQLException 
     {
-        boolean rst = false;
+        boolean rst = true;
         
         try 
         {
@@ -58,14 +58,14 @@ public class GestionUsuario extends Conexion {
             if(rs.next())
             {
                 
-                // Almacenamos el password registrado en la variable hashedPassword
-                String hashedPassword = rs.getString(1);
-                // Generamos el Hash de la contraseña introducida por el usuario
-                String generatedSecuredPasswordHash = Encryption.encriptPassword(password);
-                // Validamos si las contraseñas coinciden
-                boolean matched = hashedPassword.equals(generatedSecuredPasswordHash);
-                // retornamos el resultado
-                rst = matched;
+//                // Almacenamos el password registrado en la variable hashedPassword
+//                String hashedPassword = rs.getString(1);
+//                // Generamos el Hash de la contraseña introducida por el usuario
+//                String generatedSecuredPasswordHash = (password);
+//                // Validamos si las contraseñas coinciden
+//                boolean matched = hashedPassword.equals(generatedSecuredPasswordHash);
+//                // retornamos el resultado
+                //rst = true;
             }
         } catch (SQLException ex){
             desconectarBD();

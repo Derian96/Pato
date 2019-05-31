@@ -1,40 +1,29 @@
-/*
-    Universidad Nacional de Costa Rica
-    Sede Regional Chorotega, Campus Nicoya  
-    Ingeniería en Sistemas de Información
-    Programación II - EIF204
-    Académica: Gloriana Peña Ramírez 
 
-    PROYECTO PROGRAMADO - Facturación JAVA
-
-    Desarrolladores: 
-    - Eddie Alfaro 
-    - Derian Abarca
-    - Diego Aguilar
-*/ 
 
 package logica;
 
 public class Producto {
     int idProducto;
     String nombre;
-    int idCategoria;
     int existencia;
     double precio;
     int nivelNuevoPedido;
-    char suspendido;
+    int suspendido;
+    int idCategoria;
+    int idProveedor;
 
     public Producto() {
     }
-    
-    public Producto(int idProducto, String nombre, int idCategoria, int existencia, double precio, int nivelNuevoPedido, char suspendido) {
+
+    public Producto(int idProducto, String nombre, int existencia, double precio, int nivelNuevoPedido, int suspendido, int idCategoria, int idProveedor) {
         this.idProducto = idProducto;
         this.nombre = nombre;
-        this.idCategoria = idCategoria;
         this.existencia = existencia;
         this.precio = precio;
         this.nivelNuevoPedido = nivelNuevoPedido;
         this.suspendido = suspendido;
+        this.idCategoria = idCategoria;
+        this.idProveedor = idProveedor;
     }
 
     public int getIdProducto() {
@@ -51,14 +40,6 @@ public class Producto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public int getExistencia() {
@@ -85,18 +66,34 @@ public class Producto {
         this.nivelNuevoPedido = nivelNuevoPedido;
     }
 
-    public char getSuspendido() {
+    public int getSuspendido() {
         return suspendido;
     }
 
-    public void setSuspendido(char suspendido) {
+    public void setSuspendido(int suspendido) {
         this.suspendido = suspendido;
+    }
+
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+    
+    public int getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", idCategoria=" + idCategoria + ", existencia=" + existencia + ", precio=" + precio + ", nivelNuevoPedido=" + nivelNuevoPedido + ", suspendido=" + suspendido + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", existencia=" + existencia + ", precio=" + precio + ", nivelNuevoPedido=" + nivelNuevoPedido + ", suspendido=" + suspendido + ", idCategoria=" + idCategoria + ", idProveedor=" + idProveedor + '}';
     }
-    
-    
+
+   
 }

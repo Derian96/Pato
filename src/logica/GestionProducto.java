@@ -1,18 +1,3 @@
-/*
-    Universidad Nacional de Costa Rica
-    Sede Regional Chorotega, Campus Nicoya  
-    Ingeniería en Sistemas de Información
-    Programación II - EIF204
-    Académica: Gloriana Peña Ramírez 
-
-    PROYECTO PROGRAMADO - Facturación JAVA
-
-    Desarrolladores: 
-    - Eddie Alfaro 
-    - Derian Abarca
-    - Diego Aguilar
-*/ 
-
 package logica;
 
 import java.net.URL;
@@ -54,7 +39,6 @@ public class GestionProducto extends Conexion {
     //  método listarProducto
     public ResultSet listarProductos () {
         try {
-            // Nombre del procedimiento almacenado y como espera tres parametros
             String call = "{CALL ps_producto_listar}";
             
             // Preparamos la sentencia
@@ -74,25 +58,22 @@ public class GestionProducto extends Conexion {
     // método insertarProducto
     public boolean insertarProducto (Producto producto) {
         boolean rpta = false;
-        
         try {
             // Nos conectamos
             conectarBD();
-            
             // Buscar los datos del Producto
-            String call = "{CALL ps_producto_insertar(?,?,?,?,?,?,?)}";
-            
+            String call = "{CALL ps_producto_insertar(?,?,?,?,?,?,?,?)}";
             // Preparamos la sentencia
             obj_Procedimiento = conexion.prepareCall(call);
-            
             // Preparamos la sentencia
             obj_Procedimiento.setInt(1, producto.getIdProducto());
             obj_Procedimiento.setString(2, producto.getNombre());
-            obj_Procedimiento.setInt(3, producto.getIdCategoria());
-            obj_Procedimiento.setInt(4, producto.getExistencia());
-            obj_Procedimiento.setDouble(5, producto.getPrecio());
-            obj_Procedimiento.setInt(6, producto.getNivelNuevoPedido());
-            obj_Procedimiento.setByte(7, (byte) producto.getSuspendido());
+            obj_Procedimiento.setInt(3, producto.getExistencia());
+            obj_Procedimiento.setDouble(4, producto.getPrecio());
+            obj_Procedimiento.setInt(5, producto.getNivelNuevoPedido());
+            obj_Procedimiento.setInt(6, producto.getSuspendido());
+             obj_Procedimiento.setInt(7, producto.getIdCategoria());
+              obj_Procedimiento.setInt(8, producto.getIdProveedor());
             
            rpta = obj_Procedimiento.executeUpdate() == 1;
            
@@ -111,25 +92,22 @@ public class GestionProducto extends Conexion {
     // método editarProductos 
     public boolean editarProducto (Producto producto) {
         boolean rpta = false;
-        
         try {
             // Nos conectamos
-            conectarBD();
-            
+            conectarBD();  
             // Buscar los datos del profesor
-            String call = "{CALL ps_producto_editar(?,?,?,?,?,?,?)}";
-            
+            String call = "{CALL ps_producto_editar(?,?,?,?,?,?,?,?)}";  
             // Preparamos la sentencia
             obj_Procedimiento = conexion.prepareCall(call);
-            
             // Preparamos la sentencia
             obj_Procedimiento.setInt(1, producto.getIdProducto());
             obj_Procedimiento.setString(2, producto.getNombre());
-            obj_Procedimiento.setInt(3, producto.getIdCategoria());
-            obj_Procedimiento.setInt(4, producto.getExistencia());
-            obj_Procedimiento.setDouble(5, producto.getPrecio());
-            obj_Procedimiento.setInt(6, producto.getNivelNuevoPedido());
-            obj_Procedimiento.setByte(7, (byte) producto.getSuspendido());
+            obj_Procedimiento.setInt(3, producto.getExistencia());
+            obj_Procedimiento.setDouble(4, producto.getPrecio());
+            obj_Procedimiento.setInt(5, producto.getNivelNuevoPedido());
+            obj_Procedimiento.setInt(6,producto.getSuspendido());
+            obj_Procedimiento.setInt(7, producto.getIdCategoria());
+            obj_Procedimiento.setInt(8, producto.getIdProveedor());
             
             rpta = obj_Procedimiento.executeUpdate() == 1;
            

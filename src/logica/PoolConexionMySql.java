@@ -30,9 +30,9 @@ public class PoolConexionMySql {
     public PoolConexionMySql() {
         try {
             ds_con = new MysqlConnectionPoolDataSource();
-            ds_con.setURL("jdbc:mysql://localhost:3366/bdempresa");
+            ds_con.setURL("jdbc:mysql://localhost:3306/bdempresa");
             ds_con.setUser("root");
-            ds_con.setPassword("root");
+            ds_con.setPassword("albrian0402");
             pool = ds_con.getPooledConnection();
             System.out.println("Unica conexión establecida (Piscina de conexiones creadas)");
         } catch (SQLException ex) {
